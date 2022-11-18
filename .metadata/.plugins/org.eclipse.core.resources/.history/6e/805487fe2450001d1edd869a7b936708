@@ -1,0 +1,59 @@
+package edu;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ActorMain{
+
+	private static List<ActorDTO> getData(ResultSet rs) throws SQLException {
+		List<ActorDTO> list = new ArrayList<>();
+		
+		// Collection 추출
+		while(rs.next()) { 
+					list.add(new ActorDTO(
+							rs.getInt("actor_id"),
+							rs.getString("first_name"),
+							rs.getString("last_name")));
+		}
+		return list;
+	}
+
+	// 출력문
+	private static void printData(List<ActorDTO> list) {
+		for (ActorDTO b : list) {
+			System.out.println(b.toString());
+		}
+	}
+
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
+		String driver = "com.mysql.cj.jdbc.Driver";
+		String url = "jdbc:mysql://10.125.121.202/sakila";
+		String sql = "select * from actor";
+		
+		Class.forName(driver);
+		Connection con = DriverManager.getConnection(url, "musthave","tiger");
+		Statement st = con.createStatement();
+		ResultSet rs =st.executeQuery(sql);
+
+
+		List<ActorDTO> list = null;
+		try {
+			list = getData(rs); //불러오기
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		rs.close();
+		st.close();
+		con.close();
+
+		printData(list);
+	}
+
+}

@@ -1,0 +1,8 @@
+package edu;
+
+public class ActorDTO {
+	String actor_id;
+	String first_name;
+	String last_name;
+	
+}

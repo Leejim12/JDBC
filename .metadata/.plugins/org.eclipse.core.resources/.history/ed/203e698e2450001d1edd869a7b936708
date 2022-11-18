@@ -1,0 +1,33 @@
+package edu;
+
+public class ActorDTO {
+	String actor_id;
+	String first_name;
+	public ActorDTO(int int1, String string, String string2) {
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "ActorDTO [actor_id=" + actor_id + ", first_name=" + first_name + ", last_name=" + last_name + "]";
+	}
+	String last_name;
+	public String getActor_id() {
+		return actor_id;
+	}
+	public void setActor_id(String actor_id) {
+		this.actor_id = actor_id;
+	}
+	public String getFirst_name() {
+		return first_name;
+	}
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+	public String getLast_name() {
+		return last_name;
+	}
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+	
+}

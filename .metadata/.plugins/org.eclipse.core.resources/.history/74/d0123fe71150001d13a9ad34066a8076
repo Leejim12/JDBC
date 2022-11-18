@@ -1,0 +1,46 @@
+package edu;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+
+public class JdbcMain {
+	
+	public static void main(String[] args) throws ClassNotFoundException,SQLException{
+		 
+		String driver = "com.mysql.cj.jdbc.Driver"; // Driver 생성 (이건 불변)
+		String url = "jdbc:mysql://localhost:3306/world"; //DB 명 // default : 3306포트(MySQL)		
+		String sql = "select * from city"; // SQL 문, 테이블 명
+		
+	
+		Class.forName(driver);
+		Connection con = DriverManager.getConnection(url, "musthave","tiger");
+		Statement st = con.createStatement();
+		ResultSet rs =st.executeQuery(sql);
+		
+//		// 출력 포맷 정의 (날짜, 숫자)
+//		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		DecimalFormat sf = new DecimalFormat("#,###");
+		DecimalFormat df = new DecimalFormat("#,###");
+		
+		while(rs.next()) {
+		System.out.println(String.format("%d|%s|%s|%s|%s|%s",
+				rs.getInt("IndepYear"),
+				rs.getString("Code"),
+				rs.getString("Name"),
+				rs.getString("Region"),
+				sf.format(rs.getDate("postdate")),
+				df.format(rs.getInt("Population")
+						)));
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+	}
+
+}

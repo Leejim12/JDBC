@@ -1,0 +1,10 @@
+package com;
+
+public class jdbcMain {
+
+	public static void main(String[] args) {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+	}
+
+}
